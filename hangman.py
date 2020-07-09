@@ -1,8 +1,6 @@
 #!/user/bin/python3
 # -*- coding: utf-8 -*-
 
-# Developped for Python v3.7.3 x64
-
 # Imports
 import config as cfg
 import functions as fct

@@ -1,22 +1,23 @@
-# Python 3.7.3 x64
-
-# Miscellaneous
-SAVEFILENAME = "hangman.saves"
-GUESTNAME = "guest"
+# Game parameters
 EXTRA_ATTEMPTS = 3
-MASKCHAR = "_"
 ATTEMPTSFACTOR = 2
 BADSCOREALERT = -20
-SCOREBOARD_WIDTH = 30
-TITLEWIDTH = 60
+
+# Names
+SAVEFILENAME = "hangman.saves"
+GUESTNAME = "guest"
 
 # Graphics
+SCOREBOARD_WIDTH = 30
+TITLEWIDTH = 60
+MASKCHAR = "_"
 GAMEPROMPT  = "\\_(ಥ‿ಥ)_/ >>>"
 DEADPROMPT  =  " _(X╭╮X)_ >>>"
 HAPPYPROMPT =  "^-(°v°)-^ >>>"
 
 
 # List of available commands (as dictionary)
+# Effects of commands are implemented in 'hangman.py'
 COMMANDSLIST = {
 "s":"show scoreboard",
 "p":"select player",

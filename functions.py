@@ -1,5 +1,3 @@
-# Python 3.7.3 x64
-
 # Imports
 import random as rd
 import pickle as pk
