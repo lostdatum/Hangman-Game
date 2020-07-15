@@ -8,29 +8,22 @@ import functions as fct
 # Load scoreboard
 scoreboard = fct.scoreboard_load()
 
-# Start app
-running = True
 # Log in as guest
 playername = cfg.GUESTNAME
 scoreboard[playername] = 0
-while running :
-    playing = False
+
+# Start app
+while True:
     # Show main menu
-    choice = fct.menu_prompt(playername)
-    if choice == 's' :
+    choice = fct.menu_prompt(playername) # NB: 'choice' output will be valid at this point
+    if choice == 's': # Print scoreboard
         fct.scoreboard_print(scoreboard)
-    elif choice == 'p' :
+    elif choice == 'p': # Prompt for login and update score
         playername = fct.login(scoreboard)
         scoreboard = fct.score_load(playername, scoreboard)
-    elif choice == 'g' :
-        playing = True
-    elif choice == 'h' :
+    elif choice == 'h': # Print goofy message
         fct.hanging_print()
-        continue
-    elif choice == 'q' :
-        running = False
-    # New game
-    if playing :
+    elif choice == 'g': # New game
         # Initialize score
         score = scoreboard[playername]
         highscore = max(scoreboard.values())
@@ -42,32 +35,31 @@ while running :
         max_attempts = fct.attempts_init(len(word))
         attempts_history = list()
         # Start playing
-        fct.wordview_print(wordview, len(attempts_history), max_attempts)
-        victory = False
-        defeat = False
+        fct.status_print(wordview, len(attempts_history), max_attempts)
+        (victory, defeat) = (False, False)
         # New attempt
-        while not (victory or defeat) :
+        while not (victory or defeat):
             # Prompt for attempt
             (attempt, attempts_history) = fct.attempt_prompt(len(word), attempts_history)
             # Update view
-            if len(attempt) > 1 : # Tried to guess word
-                if attempt == word :
+            if len(attempt) > 1: # Tried to guess word
+                if attempt == word:
                     victory = True
-                else :
+                else:
                     defeat = True
-            else : # Chose 1 letter
+            else: # Chose 1 letter
                 wordview = fct.wordview_update(word, attempt, wordview)
-                if wordview == list(word) : # Found all letters
+                if wordview == list(word): # Found all letters
                     victory = True
-                elif len(attempts_history) >= max_attempts : # Used all attempts
+                elif len(attempts_history) >= max_attempts: # Used all attempts
                     defeat = True
-                else : # Game goes on
-                   fct.wordview_print(wordview, len(attempts_history), max_attempts)
+                else: # Game goes on
+                    fct.status_print(wordview, len(attempts_history), max_attempts)
             # Check success or failure
-            if victory :
+            if victory:
                 fct.hgprint("Congratulations, you found it!", prompt=cfg.HAPPYPROMPT)
-                mod = fct.success_mod(len(word),max_attempts-len(attempts_history))
-            elif defeat :
+                mod = fct.success_mod(len(word), max_attempts-len(attempts_history))
+            elif defeat:
                 fct.hgprint("You failed. It's okay... hang in there!", prompt=cfg.DEADPROMPT)
                 mod = fct.fail_mod(wordview)
         # Conclude, update score and save
@@ -76,5 +68,6 @@ while running :
         score +=mod # Update score
         scoreboard[playername] = score
         fct.comment(score, highscore)
-# Save scoreboard & quit
-fct.game_quit(playername, scoreboard)
+    elif choice == 'q': # Save scoreboard & quit
+        fct.game_quit(playername, scoreboard)
+        break

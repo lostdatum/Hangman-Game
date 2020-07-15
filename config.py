@@ -3,7 +3,7 @@ EXTRA_ATTEMPTS = 3
 ATTEMPTSFACTOR = 2
 BADSCOREALERT = -20
 
-# Names
+# Names (arbitrary)
 SAVEFILENAME = "hangman.saves"
 GUESTNAME = "guest"
 
@@ -15,19 +15,18 @@ GAMEPROMPT  = "\\_(ಥ‿ಥ)_/ >>>"
 DEADPROMPT  =  " _(X╭╮X)_ >>>"
 HAPPYPROMPT =  "^-(°v°)-^ >>>"
 
-
 # List of available commands (as dictionary)
 # Effects of commands are implemented in 'hangman.py'
 COMMANDSLIST = {
-"s":"show scoreboard",
-"p":"select player",
-"g":"play the game",
-"h":"hang out",
-"q":"quit",
+"s": "show scoreboard",
+"p": "select player",
+"g": "play the game",
+"h": "hang out",
+"q": "quit",
 }
 
-# List of available words (as tuple)
-WORDSLIST = (
+# List of available words
+WORDSLIST = [
 "angry",
 "awake",
 "bitter",
@@ -119,4 +118,4 @@ WORDSLIST = (
 "wrong",
 "yellow",
 "young"
-)
+]
